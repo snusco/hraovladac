@@ -13,7 +13,9 @@ public class Health : MonoBehaviour
     [SerializeField]private float iframesDuration;
     [SerializeField]private int numberOFFlashes;
     private SpriteRenderer spriteRend;
-    
+
+    [SerializeField] private AudioClip deathSound;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -36,11 +38,14 @@ public class Health : MonoBehaviour
         else
         {
             if (!dead)
-            {
-                anim.SetTrigger("die");
-                
+            {   
                 if (GetComponent<PlayerMovement>() != null)
                     GetComponent<PlayerMovement>().enabled = false;
+
+                anim.SetBool("grounded", true);
+                anim.SetTrigger("die");
+
+                SoundManager.Instance.PlaySound(deathSound);
 
                 dead = true;
             }
