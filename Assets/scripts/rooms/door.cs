@@ -16,10 +16,19 @@ public class Door : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            PlayerRespawn respawn = collision.GetComponent<PlayerRespawn>();
+
             if (collision.transform.position.x < transform.position.x)
             {
                 // Pohyb do ïalšej miestnosti
                 cam.MoveToNewRoom(nextRoom);
+
+                ScoreManager.Instance.AddScore(10);
+
+                GameObject temp = new GameObject("TEMP");
+                temp.transform.position = collision.transform.position + new Vector3(2f, 0, 0);
+
+                respawn.SetCurrentCheckpoint(temp.transform);
                 
                 // Aktivácia/Deaktivácia miestností (logika z 39:44)
                 nextRoom.GetComponent<Room>().ActivateRoom(true);

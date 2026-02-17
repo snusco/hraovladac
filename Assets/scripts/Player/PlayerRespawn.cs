@@ -17,7 +17,7 @@ public class PlayerRespawn : MonoBehaviour
         transform.position = currentCheckpoint.position; //Move player to checkpoint location
 
         //Move the camera to the checkpoint's room
-        //Camera.main.GetComponent<CameraController>().MoveToNewRoom(currentCheckpoint.parent);
+        Camera.main.GetComponent<CameraController>().MoveToNewRoom(currentCheckpoint.parent);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,5 +27,9 @@ public class PlayerRespawn : MonoBehaviour
             collision.GetComponent<Collider2D>().enabled = false;
             collision.GetComponent<Animator>().SetTrigger("appear");
         }
+    }
+
+    public void SetCurrentCheckpoint(Transform checkpoint){
+        currentCheckpoint = checkpoint; 
     }
 }

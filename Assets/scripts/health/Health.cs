@@ -33,6 +33,8 @@ public class Health : MonoBehaviour
         if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
+        SoundManager.Instance.PlaySound(hurtSound);
+
         if (currentHealth > 0)
         {
             anim.SetTrigger("hurt");
@@ -48,6 +50,8 @@ public class Health : MonoBehaviour
 
                 anim.SetBool("grounded", true);
                 anim.SetTrigger("die");
+
+                SoundManager.Instance.PlaySound(deathSound);
 
                 dead = true;
             }
@@ -70,10 +74,6 @@ public class Health : MonoBehaviour
         }
         Physics2D.IgnoreLayerCollision(10, 11, false);
         invulnerable = false;
-    }
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
     }
 
     //Respawn
