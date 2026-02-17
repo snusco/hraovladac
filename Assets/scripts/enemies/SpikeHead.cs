@@ -52,14 +52,14 @@ public class SpikeHead : EnemyDemage
         directions[0] = transform.right * range;
         directions[1] = -transform.right * range;
         directions[2] = transform.up * range;
-        directions[0] = -transform.up * range;
+        directions[3] = -transform.up * range;
     }
     private void Stop()
     { 
     destination = transform.position;
         attacking = false;
     }
-    private void c(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     { 
       base.OnTriggerEnter2D(collision);
         Stop();
